@@ -30,6 +30,9 @@ public class Action {
 		case "delete":
 			DogActions.delete(action.substring(action.indexOf(" ") + 1));
 			break;
+		case "name":
+			dog.setName(action.substring(action.indexOf(" ") + 1));
+			break;
 		}
 	}
 
@@ -42,6 +45,7 @@ public class Action {
 		int age = dog.getHour();
 		int hung = dog.getHung();
 		System.out.println("Your dog is " + age + " hours old.");
+		System.out.println("equals to " + dog.getMin() + " minutes.");
 		if (hung < 50) {
 			System.out.println("It's hungary.");
 		} else if (hung > 90) {
@@ -72,7 +76,7 @@ public class Action {
 			System.out.println("your dog's hungary: " + a);
 			break;
 		default:
-			System.out.println("Your dog " + DogActions.get(rnd.nextInt(DogActions.size())));
+			System.out.println(dog.getName() + " " + DogActions.get(rnd.nextInt(DogActions.size())));
 			break;
 		}
 	}
