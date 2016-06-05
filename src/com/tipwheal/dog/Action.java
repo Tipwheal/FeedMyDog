@@ -1,5 +1,7 @@
 package com.tipwheal.dog;
 
+import java.util.Random;
+
 /**
  * Action.
  * 
@@ -14,12 +16,19 @@ public class Action {
 	 * @param dog
 	 */
 	public void doAction(String action, Dog dog) {
-		switch (action) {
+		String[] actions = action.split(" ");
+		switch (actions[0]) {
 		case "show":
 			show(dog);
 			break;
 		case "feed":
 			feed(dog);
+			break;
+		case "add":
+			DogActions.add(action.substring(action.indexOf(" ") + 1));
+			break;
+		case "delete":
+			DogActions.delete(action.substring(action.indexOf(" ") + 1));
 			break;
 		}
 	}
@@ -48,5 +57,23 @@ public class Action {
 	public void feed(Dog dog) {
 		dog.feed();
 		System.out.println("You feed your dog.");
+	}
+
+	/**
+	 * randomly.
+	 * 
+	 * @param dog
+	 */
+	public void randomShow(Dog dog) {
+		Random rnd = new Random();
+		switch (rnd.nextInt(DogActions.size() + 1)) {
+		case 0:
+			int a = dog.getHung();
+			System.out.println("your dog's hungary: " + a);
+			break;
+		default:
+			System.out.println("Your dog " + DogActions.get(rnd.nextInt(DogActions.size())));
+			break;
+		}
 	}
 }

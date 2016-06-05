@@ -18,7 +18,7 @@ public class Dog implements Serializable {
 	private int hung = 100;
 
 	public void feed() {
-		hung++;
+		hung += 50;
 	}
 
 	public void grow() {
