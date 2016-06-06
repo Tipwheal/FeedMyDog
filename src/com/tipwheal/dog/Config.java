@@ -6,7 +6,7 @@ import java.util.TreeSet;
 
 /**
  * Config.<br>
- * All settings.
+ * All settings. But have no use now.
  * 
  * @author Administrator
  *

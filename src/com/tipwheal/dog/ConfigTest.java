@@ -2,6 +2,12 @@ package com.tipwheal.dog;
 
 import java.lang.reflect.Method;
 
+/**
+ * of no use now.
+ * 
+ * @author Administrator
+ *
+ */
 public class ConfigTest {
 	// public static void main(String[] args) {
 	// try {
@@ -17,8 +23,8 @@ public class ConfigTest {
 
 	public static void main(String[] args) throws Exception {
 		Dog dog = new Dog();
-		Method m = new Action().getClass().getDeclaredMethod("show",Dog.class);
-		m.invoke(new Action(),new Object[] {dog});
+		Method m = new Action().getClass().getDeclaredMethod("show", Dog.class);
+		m.invoke(new Action(), new Object[] { dog });
 		// String methodName = "show";
 		// String params = "value";
 		// ConfigTest obj = new ConfigTest();

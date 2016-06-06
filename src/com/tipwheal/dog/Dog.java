@@ -12,6 +12,7 @@ import java.util.HashMap;
  */
 public class Dog implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private DogActions actions = new DogActions();
 	private HashMap<String, String> sFea = new HashMap<>();
 	private HashMap<String, Integer> iFea = new HashMap<>();
 	private HashMap<String, Double> dFea = new HashMap<>();
@@ -29,13 +30,46 @@ public class Dog implements Serializable {
 		dFea.put("mood", 5.0);
 		dFea.put("weight", 20.0);
 		dFea.put("strength", 20.0);
+		dFea.put("clearity", 20.0);
+	}
+
+	/**
+	 * show the state of the dog.
+	 * 
+	 * @return
+	 */
+	public String show() {
+		int age = this.getHour();
+		int hung = this.getHung();
+		String result = "";
+		result += this.getName() + " is " + age + " hours old.";
+		result += "equals to " + this.getMin() + " minutes.";
+		if (hung < 50) {
+			result += "It's hungary.";
+		} else if (hung > 90) {
+			result += "It's not hungary at all.";
+		}
+		return result;
 	}
 
 	/**
 	 * feed.
 	 */
-	public void feed() {
+	public String feed() {
 		iFea.replace("hung", iFea.get("hung") + 50);
+		String result = "You feed " + this.getName() + ".";
+		return result;
+	}
+
+	public DogActions getAction() {
+		return actions;
+	}
+
+	/**
+	 * wash.
+	 */
+	public void wash() {
+		dFea.replace("clearity", dFea.get("clearity") + 1.0);
 	}
 
 	/**

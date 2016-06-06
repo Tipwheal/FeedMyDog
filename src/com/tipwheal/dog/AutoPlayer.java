@@ -28,7 +28,7 @@ public class AutoPlayer implements Runnable {
 		Random rnd = new Random();
 		while (true) {
 			if (on && rnd.nextInt(100) > 75) {
-				new Action().randomShow(dog);
+				System.out.println(new Action().randomShow(dog));
 			}
 			try {
 				Thread.sleep(2000);
