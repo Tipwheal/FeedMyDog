@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  */
 @SuppressWarnings("unchecked")
-public abstract class DogActions implements Serializable {
+public class DogActions implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static ArrayList<String> action = new ArrayList<>();
 
@@ -21,11 +21,11 @@ public abstract class DogActions implements Serializable {
 		action = (ArrayList<String>) IOHelper.readObject("action");
 	}
 
-	public static String get(int i) {
+	public String get(int i) {
 		return action.get(i);
 	}
 
-	public static int size() {
+	public int size() {
 		return action.size();
 	}
 
@@ -34,7 +34,7 @@ public abstract class DogActions implements Serializable {
 	 * 
 	 * @param s
 	 */
-	public static void add(String s) {
+	public void add(String s) {
 		action.add(s);
 		IOHelper.saveObject("action", (Object) action);
 		action = (ArrayList<String>) IOHelper.readObject("action");
@@ -45,7 +45,7 @@ public abstract class DogActions implements Serializable {
 	 * 
 	 * @param s
 	 */
-	public static void delete(String s) {
+	public void delete(String s) {
 		action.remove(s);
 		IOHelper.saveObject("action", (Object) action);
 		action = (ArrayList<String>) IOHelper.readObject("action");

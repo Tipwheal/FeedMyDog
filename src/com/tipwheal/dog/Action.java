@@ -20,51 +20,32 @@ public class Action {
 		String[] actions = action.split(" ");
 		switch (actions[0]) {
 		case "show":
-			show(dog);
+			System.out.println(dog.show());
 			break;
 		case "feed":
-			feed(dog);
+			System.out.println(dog.feed());
 			break;
 		case "add":
-			DogActions.add(action.substring(action.indexOf(" ") + 1));
+			dog.getAction().add(action.substring(action.indexOf(" ") + 1));
 			break;
 		case "delete":
-			DogActions.delete(action.substring(action.indexOf(" ") + 1));
+			dog.getAction().delete((action.substring(action.indexOf(" ") + 1)));
 			break;
 		case "name":
 			dog.setName(action.substring(action.indexOf(" ") + 1));
 			break;
 		case "random":
 			AutoPlayer.turn(actions[1]);
+			break;
 		case "play":
+			dog.play();
+			System.out.println("You play with " + dog.getName() + ", and it feels happy.");
+			break;
+		case "wash":
+			dog.wash();
+			System.out.println("You wash " + dog.getName() + ", and it became more clear.");
+			break;
 		}
-	}
-
-	/**
-	 * show the state of your dog.
-	 * 
-	 * @param dog
-	 */
-	public void show(Dog dog) {
-		int age = dog.getHour();
-		int hung = dog.getHung();
-		System.out.println("Your dog is " + age + " hours old.");
-		System.out.println("equals to " + dog.getMin() + " minutes.");
-		if (hung < 50) {
-			System.out.println("It's hungary.");
-		} else if (hung > 90) {
-			System.out.println("It's not hungary at all.");
-		}
-	}
-
-	/**
-	 * feed your dog.
-	 * 
-	 * @param dog
-	 */
-	public void feed(Dog dog) {
-		dog.feed();
-		System.out.println("You feed your dog.");
 	}
 
 	/**
@@ -72,20 +53,18 @@ public class Action {
 	 * 
 	 * @param dog
 	 */
-	public void randomShow(Dog dog) {
+	public String randomShow(Dog dog) {
 		Random rnd = new Random();
-		switch (rnd.nextInt(DogActions.size() + 1)) {
+		String result = "";
+		switch (rnd.nextInt(dog.getAction().size() + 1)) {
 		case 0:
 			int a = dog.getHung();
-			System.out.println("your dog's hungary: " + a);
+			result += dog.getName() + "'s hungary: " + a;
 			break;
 		default:
-			System.out.println(dog.getName() + " " + DogActions.get(rnd.nextInt(DogActions.size())));
+			result += dog.getName() + " " + dog.getAction().get(rnd.nextInt(dog.getAction().size()));
 			break;
 		}
-	}
-	
-	public void show() {
-		System.out.println("hello");
+		return result;
 	}
 }
