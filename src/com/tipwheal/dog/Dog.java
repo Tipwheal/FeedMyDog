@@ -26,6 +26,9 @@ public class Dog implements Serializable {
 		iFea.put("hour", 0);
 		iFea.put("day", 0);
 		iFea.put("hung", 100);
+		dFea.put("mood", 5.0);
+		dFea.put("weight", 20.0);
+		dFea.put("strength", 20.0);
 	}
 
 	/**
@@ -33,6 +36,13 @@ public class Dog implements Serializable {
 	 */
 	public void feed() {
 		iFea.replace("hung", iFea.get("hung") + 50);
+	}
+
+	/**
+	 * play.
+	 */
+	public void play() {
+		dFea.replace("mood", dFea.get("mood") + 0.3);
 	}
 
 	/**
@@ -68,5 +78,13 @@ public class Dog implements Serializable {
 
 	public void setName(String name) {
 		sFea.replace("name", name);
+	}
+
+	public double getMood() {
+		return dFea.get("mood");
+	}
+
+	public double getStrength() {
+		return dFea.get("strength");
 	}
 }

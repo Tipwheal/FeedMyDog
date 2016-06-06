@@ -9,6 +9,7 @@ import java.util.Random;
  *
  */
 public class Action {
+
 	/**
 	 * analyzed input and do action.
 	 * 
@@ -35,6 +36,7 @@ public class Action {
 			break;
 		case "random":
 			AutoPlayer.turn(actions[1]);
+		case "play":
 		}
 	}
 
@@ -81,5 +83,9 @@ public class Action {
 			System.out.println(dog.getName() + " " + DogActions.get(rnd.nextInt(DogActions.size())));
 			break;
 		}
+	}
+	
+	public void show() {
+		System.out.println("hello");
 	}
 }
