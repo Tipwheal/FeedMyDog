@@ -16,6 +16,9 @@ public class Dog implements Serializable {
 	private HashMap<String, Integer> iFea = new HashMap<>();
 	private HashMap<String, Double> dFea = new HashMap<>();
 
+	/**
+	 * constructor.
+	 */
 	public Dog() {
 		sFea.put("name", "Jack");
 		iFea.put("sec", 0);
@@ -25,10 +28,16 @@ public class Dog implements Serializable {
 		iFea.put("hung", 100);
 	}
 
+	/**
+	 * feed.
+	 */
 	public void feed() {
 		iFea.replace("hung", iFea.get("hung") + 50);
 	}
 
+	/**
+	 * grow.
+	 */
 	public void grow() {
 		iFea.replace("sec", iFea.get("sec") + 10);
 		iFea.replace("min", iFea.get("sec") / 60);

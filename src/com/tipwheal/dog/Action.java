@@ -33,6 +33,8 @@ public class Action {
 		case "name":
 			dog.setName(action.substring(action.indexOf(" ") + 1));
 			break;
+		case "random":
+			AutoPlayer.turn(actions[1]);
 		}
 	}
 
