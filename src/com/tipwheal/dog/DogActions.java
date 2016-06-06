@@ -3,13 +3,22 @@ package com.tipwheal.dog;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * DogActions.
+ * 
+ * @author Administrator
+ *
+ */
 @SuppressWarnings("unchecked")
 public abstract class DogActions implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static ArrayList<String> action = new ArrayList<>();
-	
-	static{
-		action = (ArrayList<String>) ObjectIO.readObject("action");
+
+	/**
+	 * initialize.
+	 */
+	static {
+		action = (ArrayList<String>) IOHelper.readObject("action");
 	}
 
 	public static String get(int i) {
@@ -20,15 +29,25 @@ public abstract class DogActions implements Serializable {
 		return action.size();
 	}
 
+	/**
+	 * add an action.
+	 * 
+	 * @param s
+	 */
 	public static void add(String s) {
 		action.add(s);
-		ObjectIO.saveObject("action", (Object) action);
-		action = (ArrayList<String>) ObjectIO.readObject("action");
+		IOHelper.saveObject("action", (Object) action);
+		action = (ArrayList<String>) IOHelper.readObject("action");
 	}
 
+	/**
+	 * delete an action.
+	 * 
+	 * @param s
+	 */
 	public static void delete(String s) {
 		action.remove(s);
-		ObjectIO.saveObject("action", (Object) action);
-		action = (ArrayList<String>) ObjectIO.readObject("action");
+		IOHelper.saveObject("action", (Object) action);
+		action = (ArrayList<String>) IOHelper.readObject("action");
 	}
 }
