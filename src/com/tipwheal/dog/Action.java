@@ -80,6 +80,11 @@ public class Action {
         return sb.toString();
     }
 
+    /**
+     * @param mode
+     * @param dog
+     * @return
+     */
     public String show(String mode, Dog dog) {
         StringBuilder sb = new StringBuilder("");
         switch (mode) {

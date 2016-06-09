@@ -12,24 +12,27 @@ import java.util.HashMap;
 public class Dog implements Serializable {
     private static final long serialVersionUID = 1L;
     private DogActions actions = new DogActions();
-    private HashMap<String, String> sFea = new HashMap<>();
-    private HashMap<String, Integer> iFea = new HashMap<>();
-    private HashMap<String, Double> dFea = new HashMap<>();
+    private String name;
+    private int sec;
+    private int min;
+    private int hour;
+    private int day;
+    private int hung;
+    private double mood;
+    private double weight;
+    private double strength;
+    private double clean;
 
     /**
      * constructor.
      */
     public Dog() {
-        sFea.put("name", "Jack");
-        iFea.put("sec", 0);
-        iFea.put("min", 0);
-        iFea.put("hour", 0);
-        iFea.put("day", 0);
-        iFea.put("hung", 100);
-        dFea.put("mood", 5.0);
-        dFea.put("weight", 20.0);
-        dFea.put("strength", 20.0);
-        dFea.put("clean", 20.0);
+        name = "Jack";
+        hung = 100;
+        mood = 5.0;
+        weight = 20.0;
+        strength = 20.0;
+        clean = 20.0;
     }
 
     /**
@@ -55,7 +58,7 @@ public class Dog implements Serializable {
      * feed.
      */
     public String feed() {
-        iFea.replace("hung", iFea.get("hung") + 50);
+        hung += 50;
         String result = "You feed " + this.getName() + ".";
         return result;
     }
@@ -64,67 +67,100 @@ public class Dog implements Serializable {
      * wash.
      */
     public void wash() {
-        dFea.replace("clean", dFea.get("clean") + 1.0);
+        clean += 1.0;
     }
 
+    /**
+     * @return
+     */
     public double getClean() {
-        return dFea.get("clean");
+        return clean;
     }
 
+    /**
+     *
+     */
     public void exercise() {
-        dFea.replace("strength", dFea.get("strength") + 1.0);
+        strength += 1.0;
     }
 
     /**
      * play.
      */
     public void play() {
-        dFea.replace("mood", dFea.get("mood") + 0.3);
+        mood += 0.3;
     }
 
     /**
      * grow.
      */
     public void grow() {
-        iFea.replace("sec", iFea.get("sec") + 10);
-        iFea.replace("min", iFea.get("sec") / 60);
-        iFea.replace("hour", iFea.get("min") / 60);
-        iFea.replace("day", iFea.get("hour") / 24);
-        iFea.replace("hung", iFea.get("hung") - 1);
+        sec += 10;
+        min = sec / 60;
+        hour = min / 60;
+        day = hour / 24;
+        hung -= 1;
     }
 
+    /**
+     * @return
+     */
     public int getMin() {
-        return iFea.get("min");
+        return min;
     }
 
+    /**
+     * @return
+     */
     public int getHour() {
-        return iFea.get("hour");
+        return hour;
     }
 
+    /**
+     * @return
+     */
     public int getDay() {
-        return iFea.get("day");
+        return day;
     }
 
+    /**
+     * @return
+     */
     public int getHung() {
-        return iFea.get("hung");
+        return hung;
     }
 
+    /**
+     * @return
+     */
     public String getName() {
-        return sFea.get("name");
+        return name;
     }
 
+    /**
+     * @param name
+     */
     public void setName(String name) {
-        sFea.replace("name", name);
+        this.name = name;
     }
 
+    /**
+     * @return
+     */
     public double getMood() {
-        return dFea.get("mood");
+        return mood;
     }
 
+    /**
+     * @return
+     */
     public double getStrength() {
-        return dFea.get("strength");
+        return strength;
     }
 
+    /**
+     * @return
+     */
     public DogActions getActions() {
         return actions;
     }
