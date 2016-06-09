@@ -5,54 +5,69 @@ import java.util.ArrayList;
 
 /**
  * DogActions.
- * 
- * @author Administrator
  *
+ * @author Administrator
  */
 public class DogActions implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private static ArrayList<String> action = new ArrayList<>();
+    private static final long serialVersionUID = 1L;
+    private static ArrayList<String> action = new ArrayList<>();
 
-	public DogActions() {
-		load();
-		save();
-	}
+    /**
+     *
+     */
+    public DogActions() {
+        load();
+        save();
+    }
 
-	public String get(int i) {
-		return action.get(i);
-	}
+    /**
+     * @param i
+     * @return
+     */
+    public String get(int i) {
+        return action.get(i);
+    }
 
-	public int size() {
-		return action.size();
-	}
+    /**
+     * @return
+     */
+    public int size() {
+        return action.size();
+    }
 
-	/**
-	 * add an action.
-	 * 
-	 * @param s
-	 */
-	public void add(String s) {
-		action.add(s);
-	}
+    /**
+     * add an action.
+     *
+     * @param s
+     */
+    public void add(String s) {
+        action.add(s);
+    }
 
-	/**
-	 * delete an action.
-	 * 
-	 * @param s
-	 */
-	public void delete(String s) {
-		action.remove(s);
-	}
+    /**
+     * delete an action.
+     *
+     * @param s
+     */
+    public void delete(String s) {
+        action.remove(s);
+    }
 
-	@SuppressWarnings("unchecked")
-	public void load() {
-		action = (ArrayList<String>) IOHelper.readObject("action.ser");
-		if(action == null) {
-			action = new ArrayList<>();
-		}
-	}
+    /**
+     *
+     */
+    @SuppressWarnings("unchecked")
+    public void load() {
+        action = (ArrayList<String>) IOHelper.readObject("action.ser");
+        if (action == null) {
+            action = new ArrayList<>();
+        }
+    }
 
-	public void save() {
-		IOHelper.saveObject("action.ser", action);
-	}
+    /**
+     *
+     */
+    public void save() {
+        IOHelper.saveObject("action.ser", action);
+    }
 }

@@ -31,6 +31,10 @@ public abstract class IOHelper {
         return input;
     }
 
+    /**
+     * @param fileName
+     * @param object
+     */
     public static void saveObject(String fileName, Object object) {
         File file = new File(fileName);
         try {
@@ -42,6 +46,10 @@ public abstract class IOHelper {
         }
     }
 
+    /**
+     * @param fileName
+     * @return
+     */
     public static Object readObject(String fileName) {
         File file = new File(fileName);
         if (!file.exists()) {
