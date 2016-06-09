@@ -112,8 +112,7 @@ public class Action {
         String result = "";
         switch (rnd.nextInt(dog.getActions().size() + 1)) {
             case 0:
-                int a = dog.getHung();
-                result += dog.getName() + "'s hungary: " + a;
+                result += dog.getName() + " has no thing to do.";
                 break;
             default:
                 result += dog.getName() + " " + dog.getActions().get(rnd.nextInt(dog.getActions().size()));

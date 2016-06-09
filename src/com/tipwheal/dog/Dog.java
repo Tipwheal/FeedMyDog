@@ -29,7 +29,7 @@ public class Dog implements Serializable {
     public Dog() {
         name = "Jack";
         hung = 100;
-        mood = 5.0;
+        mood = 20.0;
         weight = 20.0;
         strength = 20.0;
         clean = 20.0;
@@ -92,13 +92,26 @@ public class Dog implements Serializable {
     }
 
     /**
-     * grow.
+     * grow.<br>
+     * when grow, time counter runs and clean, mood, strength and hungary decline.<br>
+     * for every minute, clean decline by 0.1 points.<br>
+     * and every hour, mood decline half.<br>
+     * and for strength, it decline 1.0 every day.
      */
     public void grow() {
         sec += 10;
-        min = sec / 60;
-        hour = min / 60;
-        day = hour / 24;
+        if (sec / 60 > min) {
+            min = sec / 60;
+            clean -= 0.1;
+        }
+        if (min / 60 > hour) {
+            hour = min / 60;
+            mood /= 2;
+        }
+        if (hour / 24 > day) {
+            day = hour / 24;
+            strength -= 1.0;
+        }
         hung -= 1;
     }
 
