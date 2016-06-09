@@ -30,7 +30,7 @@ public class Dog implements Serializable {
 		dFea.put("mood", 5.0);
 		dFea.put("weight", 20.0);
 		dFea.put("strength", 20.0);
-		dFea.put("clearity", 20.0);
+		dFea.put("clean", 20.0);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class Dog implements Serializable {
 		int age = this.getHour();
 		int hung = this.getHung();
 		String result = "";
-		result += this.getName() + " is " + age + " hours old.";
+		result += this.getName() + " is " + age + " hours old.\n";
 		result += "equals to " + this.getMin() + " minutes.";
 		if (hung < 50) {
 			result += "It's hungary.";
@@ -54,22 +54,26 @@ public class Dog implements Serializable {
 
 	/**
 	 * feed.
-	 */
+		*/
 	public String feed() {
 		iFea.replace("hung", iFea.get("hung") + 50);
 		String result = "You feed " + this.getName() + ".";
 		return result;
 	}
 
-	public DogActions getAction() {
-		return actions;
-	}
-
 	/**
 	 * wash.
 	 */
 	public void wash() {
-		dFea.replace("clearity", dFea.get("clearity") + 1.0);
+		dFea.replace("clean", dFea.get("clean") + 1.0);
+	}
+
+	public double getClean() {
+		return dFea.get("clean");
+	}
+
+	public void exercise() {
+		dFea.replace("strength", dFea.get("strength")+1.0);
 	}
 
 	/**
@@ -120,5 +124,9 @@ public class Dog implements Serializable {
 
 	public double getStrength() {
 		return dFea.get("strength");
+	}
+
+	public DogActions getActions() {
+		return actions;
 	}
 }

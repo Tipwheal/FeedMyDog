@@ -9,16 +9,13 @@ import java.util.ArrayList;
  * @author Administrator
  *
  */
-@SuppressWarnings("unchecked")
 public class DogActions implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static ArrayList<String> action = new ArrayList<>();
 
-	/**
-	 * initialize.
-	 */
-	static {
-		action = (ArrayList<String>) IOHelper.readObject("action");
+	public DogActions() {
+		load();
+		save();
 	}
 
 	public String get(int i) {
@@ -36,8 +33,6 @@ public class DogActions implements Serializable {
 	 */
 	public void add(String s) {
 		action.add(s);
-		IOHelper.saveObject("action", (Object) action);
-		action = (ArrayList<String>) IOHelper.readObject("action");
 	}
 
 	/**
@@ -47,7 +42,17 @@ public class DogActions implements Serializable {
 	 */
 	public void delete(String s) {
 		action.remove(s);
-		IOHelper.saveObject("action", (Object) action);
-		action = (ArrayList<String>) IOHelper.readObject("action");
+	}
+
+	@SuppressWarnings("unchecked")
+	public void load() {
+		action = (ArrayList<String>) IOHelper.readObject("action.ser");
+		if(action == null) {
+			action = new ArrayList<>();
+		}
+	}
+
+	public void save() {
+		IOHelper.saveObject("action.ser", action);
 	}
 }
