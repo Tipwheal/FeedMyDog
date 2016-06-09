@@ -21,19 +21,19 @@ public class Warmer implements Runnable {
      */
     public void run() {
         while (true) {
+            if (dog.getHung() <= 50) {
+                System.out.println(dog.getName() + " is hungary.");
+            }
+            if (dog.getMood() <= 10.0) {
+                System.out.println(dog.getName() + " is unhappy.");
+            }
+            if (dog.getClean() <= 10.0) {
+                System.out.println(dog.getName() + " wants to take a shower.");
+            }
+            if (dog.getStrength() <= 10.0) {
+                System.out.println(dog.getName() + " is weak.");
+            }
             try {
-                if (dog.getHung() <= 50) {
-                    System.out.println(dog.getName() + " is hungary.");
-                }
-                if (dog.getMood() <= 10.0) {
-                    System.out.println(dog.getName() + " is unhappy.");
-                }
-                if (dog.getClean() <= 10.0) {
-                    System.out.println(dog.getName() + " wants to take a shower.");
-                }
-                if (dog.getStrength() <= 10.0) {
-                    System.out.println(dog.getName() + " is weak.");
-                }
                 Thread.sleep(10000);
             } catch (Exception e) {
                 e.printStackTrace();
