@@ -14,6 +14,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Dog dog = new DogLoader().load();
+        Temp.dog = dog;
         Action action = new Action();
         DogSaver saver = new DogSaver(dog);
         Thread auto = new Thread(new AutoPlayer(dog));
