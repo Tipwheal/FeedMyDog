@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
  * Created by Administrator on 2016/6/10.
  */
 public class MainFrame extends JFrame {
+    private MainFrame mainFrame = this;
     private JTextArea mainText;
 
     public MainFrame(Dog dog) {
@@ -26,7 +27,8 @@ public class MainFrame extends JFrame {
         name.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new NameRefactor(dog);
+                new NameRefactor(dog,mainFrame);
+                mainFrame.setEnabled(false);
             }
         });
         JButton play = new JButton();
@@ -114,7 +116,7 @@ public class MainFrame extends JFrame {
         mainText = new JTextArea();
         mainText.setLineWrap(true);
         mainText.setWrapStyleWord(true);
-        mainText.setEnabled(false);
+        mainText.setEditable(false);
         JScrollPane mainTextPane = new JScrollPane(mainText);
         mainTextPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         mainTextPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
