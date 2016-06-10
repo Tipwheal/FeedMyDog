@@ -9,7 +9,7 @@ public class BasketBall implements UseAble {
         double clean = -5.0;
         double strength = 0.5;
         double mood = 1.3;
-        return new Adder(hung,clean,strength,mood);
+        return new Adder(hung,clean,strength,mood,dog);
     }
     public void store(Room room) {
         room.store(2);

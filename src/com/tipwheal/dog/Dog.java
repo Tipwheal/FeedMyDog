@@ -103,6 +103,20 @@ public class Dog implements Serializable {
     }
 
     /**
+     * play with UseAble.
+     *
+     * @param u UseAble.
+     */
+    public void play(UseAble u) {
+        if (u == null) {
+            this.play();
+            return;
+        }
+        Adder adder = (Adder) u.use(this);
+        adder.use(this);
+    }
+
+    /**
      * grow.<br>
      * when grow, time counter runs and clean, mood, strength and hungary decline.<br>
      * for every minute, clean decline by 0.1 points.<br>
@@ -228,7 +242,7 @@ public class Dog implements Serializable {
     /**
      * getter for actions.
      *
-     * @return actoins.
+     * @return actions.
      */
     public DogActions getActions() {
         return actions;
