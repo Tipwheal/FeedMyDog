@@ -20,6 +20,15 @@ public class MainFrame extends JFrame {
         Box box = new Box(BoxLayout.Y_AXIS);
         JLabel boxLabel = new JLabel("please choose:");
         box.add(boxLabel);
+        JButton name = new JButton();
+        name.setText("name");
+        name.setBackground(Color.lightGray);
+        name.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new NameRefactor(dog);
+            }
+        });
         JButton play = new JButton();
         play.setText("play");
         play.setBackground(Color.lightGray);
@@ -92,6 +101,7 @@ public class MainFrame extends JFrame {
                 mainText.setText("hello.");
             }
         });
+        box.add(name);
         box.add(play);
         box.add(wash);
         box.add(exercise);
@@ -110,7 +120,7 @@ public class MainFrame extends JFrame {
         mainTextPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.getContentPane().add(mainText, BorderLayout.CENTER);
 
-        this.setSize(600, 400);
+        this.setBounds(400,200,600,400);
         this.setVisible(true);
     }
 }
