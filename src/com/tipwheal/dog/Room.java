@@ -5,16 +5,22 @@ package com.tipwheal.dog;
  */
 public class Room {
     private double space = 100.0;
+    private Dog dog;
 
     public Room(Dog dog) {
-
+        this.dog = dog;
     }
 
-    public void takeUp(double d) {
-        space -= d;
+    public boolean store(double d) {
+        if (d <= this.space) {
+            space -= d;
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void takeUp(int i) {
-        space -= i;
+    public void store(int i) {
+        this.store((double) i);
     }
 }
