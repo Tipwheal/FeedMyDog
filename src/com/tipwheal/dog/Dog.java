@@ -38,7 +38,7 @@ public class Dog implements Serializable {
     /**
      * show the state of the dog.
      *
-     * @return
+     * @return a string to print.
      */
     public String show() {
         int age = this.getHour();
@@ -71,21 +71,32 @@ public class Dog implements Serializable {
     }
 
     /**
-     * @return
+     * getter for clean.
+     *
+     * @return clean.
      */
     public double getClean() {
         return clean;
     }
 
     /**
+     * setter for clean.
      *
+     * @param clean param.
+     */
+    public void setClean(double clean) {
+        this.clean = clean;
+    }
+
+    /**
+     * exercise and get stronger.
      */
     public void exercise() {
         strength += 1.0;
     }
 
     /**
-     * play.
+     * just play without Playable.
      */
     public void play() {
         mood += 0.3;
@@ -116,63 +127,108 @@ public class Dog implements Serializable {
     }
 
     /**
-     * @return
+     * getter for min.
+     *
+     * @return min.
      */
     public int getMin() {
         return min;
     }
 
     /**
-     * @return
+     * getter for hour.
+     *
+     * @return hour.
      */
     public int getHour() {
         return hour;
     }
 
     /**
-     * @return
+     * getter for day.
+     *
+     * @return day.
      */
     public int getDay() {
         return day;
     }
 
     /**
-     * @return
+     * getter for hung.
+     *
+     * @return hung.
      */
     public int getHung() {
         return hung;
     }
 
     /**
-     * @return
+     * setter for hung.
+     *
+     * @param hung param.
+     */
+    public void setHung(int hung) {
+        this.hung = hung;
+    }
+
+    /**
+     * getter for name.
+     *
+     * @return name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @param name
+     * setter for name.
+     *
+     * @param name param.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @return
+     * getter for mood.
+     *
+     * @return mood
      */
     public double getMood() {
         return mood;
     }
 
     /**
-     * @return
+     * setter for mood.
+     *
+     * @param mood param.
+     */
+    public void setMood(double mood) {
+        this.mood = mood;
+    }
+
+    /**
+     * getter for strength.
+     *
+     * @return strength.
      */
     public double getStrength() {
         return strength;
     }
 
     /**
-     * @return
+     * setter for strength.
+     *
+     * @param strength to be set.
+     */
+    public void setStrength(double strength) {
+        this.strength = strength;
+    }
+
+    /**
+     * getter for actions.
+     *
+     * @return actoins.
      */
     public DogActions getActions() {
         return actions;
