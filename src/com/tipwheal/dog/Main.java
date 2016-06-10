@@ -1,5 +1,6 @@
 package com.tipwheal.dog;
 
+import com.tipwheal.visual.*;
 /**
  * Main part of this game.
  *
@@ -17,6 +18,7 @@ public class Main {
         DogSaver saver = new DogSaver(dog);
         Thread auto = new Thread(new AutoPlayer(dog));
         Thread warn = new Thread(new Warmer(dog));
+        MainFrame frame = new MainFrame(dog);
         auto.start();
         warn.start();
         saver.start();

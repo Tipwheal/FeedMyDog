@@ -43,8 +43,7 @@ public class Action {
                 AutoPlayer.turn(actions[1]);
                 break;
             case "play":
-                dog.play();
-                System.out.println("You play with " + dog.getName() + ", and it feels happy.");
+                this.play(dog, actions);
                 break;
             case "wash":
                 dog.wash();
@@ -119,5 +118,32 @@ public class Action {
                 break;
         }
         return result;
+    }
+
+    public void play(Dog dog, String[] actions) {
+        if (actions.length == 1) {
+            dog.play();
+            System.out.println(dog.getName() + " plays and be happier.");
+        } else if (actions.length == 3) {
+            switch (actions[1]) {
+                case "-t":
+                    dog.play(this.getUseAble(actions[2]));
+                    break;
+            }
+        }
+    }
+
+    /**
+     * get UseAble
+     *
+     * @param name
+     * @return
+     */
+    public UseAble getUseAble(String name) {
+        switch (name) {
+            case "basketball":
+                return new BasketBall();
+        }
+        return null;
     }
 }
