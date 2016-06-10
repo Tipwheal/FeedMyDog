@@ -7,6 +7,6 @@ import com.tipwheal.dog.Dog;
  */
 public class Test {
     public static void main(String[] args) {
-        new NameRefactor(new Dog());
+        new NameRefactor(new Dog(),null);
     }
 }
