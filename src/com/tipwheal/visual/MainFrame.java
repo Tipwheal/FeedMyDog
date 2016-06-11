@@ -18,17 +18,16 @@ public class MainFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Feed My Dog 1.0");
 
-        Box box = new Box(BoxLayout.Y_AXIS);
-        JLabel boxLabel = new JLabel("please choose:");
-        box.add(boxLabel);
+        JPanel buttonPanel = new JPanel(new GridLayout(12,1));
+        JLabel boxLabel = new JLabel("Select:");
+        buttonPanel.add(boxLabel);
         JButton name = new JButton();
         name.setText("name");
         name.setBackground(Color.lightGray);
         name.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new NameRefactor(dog,mainFrame);
-                mainFrame.setEnabled(false);
+                new NameRefactor(dog, mainFrame);
             }
         });
         JButton play = new JButton();
@@ -36,8 +35,8 @@ public class MainFrame extends JFrame {
         play.setBackground(Color.lightGray);
         play.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainText.setText("You play with your dog.");
-                dog.play();
+                mainText.setText(dog.play());
+//                new PlayFrame(mainFrame,"What To Play",true);
             }
         });
         JButton wash = new JButton();
@@ -103,15 +102,18 @@ public class MainFrame extends JFrame {
                 mainText.setText("hello.");
             }
         });
-        box.add(name);
-        box.add(play);
-        box.add(wash);
-        box.add(exercise);
-        box.add(feed);
-        box.add(show);
-        box.add(random);
-        box.add(help);
-        this.getContentPane().add(box, BorderLayout.EAST);
+        buttonPanel.setAlignmentY((float) 20);
+        buttonPanel.setAlignmentX((float) 0.3);
+        buttonPanel.add(new JLabel(""));
+        buttonPanel.add(name);
+        buttonPanel.add(play);
+        buttonPanel.add(wash);
+        buttonPanel.add(exercise);
+        buttonPanel.add(feed);
+        buttonPanel.add(show);
+        buttonPanel.add(random);
+        buttonPanel.add(help);
+        this.getContentPane().add(buttonPanel, BorderLayout.EAST);
 
         mainText = new JTextArea();
         mainText.setLineWrap(true);
@@ -122,7 +124,8 @@ public class MainFrame extends JFrame {
         mainTextPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.getContentPane().add(mainText, BorderLayout.CENTER);
 
-        this.setBounds(400,200,600,400);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setBounds((dimension.width - 600) / 2, (dimension.height - 400) / 2, 600, 400);
         this.setVisible(true);
     }
 }

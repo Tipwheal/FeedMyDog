@@ -98,8 +98,9 @@ public class Dog implements Serializable {
     /**
      * just play without Playable.
      */
-    public void play() {
+    public String play() {
         mood += 0.3;
+        return "You play with " + this.getName() + ".";
     }
 
     /**
@@ -200,7 +201,8 @@ public class Dog implements Serializable {
      * @param name param.
      */
     public void setName(String name) {
-        this.name = name;
+        if (!name.equals(""))
+            this.name = name;
     }
 
     /**
