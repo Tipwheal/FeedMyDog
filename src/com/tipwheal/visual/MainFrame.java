@@ -3,6 +3,7 @@ package com.tipwheal.visual;
 import com.tipwheal.dog.*;
 import com.tipwheal.dog.Action;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
@@ -14,6 +15,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.ColorModel;
+import java.io.IOException;
+
+import static javax.imageio.ImageIO.read;
 
 /**
  * Created by Administrator on 2016/6/10.
@@ -31,11 +35,39 @@ public class MainFrame extends JFrame {
     private JButton help;
     private JButton setting;
     private JLabel warmLabel;
+    private JPanel statePanel;
 
+    /**
+     * constructor.
+     *
+     * @param dog
+     */
     public MainFrame(Dog dog) {
         Action action = new Action();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Feed My Dog 1.0");
+
+        try {
+            Image image = ImageIO.read(this.getClass().getResource("/img/newlogo.png"));
+            this.setIconImage(image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.setBackground(SystemColor.control);
+        menuBar.setBorder(new MatteBorder(0, 0, 1, 0, SystemColor.activeCaption));
+        JMenu file = new JMenu("File");
+        JMenuItem exit = new JMenuItem("Exit");
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        file.add(exit);
+        menuBar.add(file);
+        this.setJMenuBar(menuBar);
 
         JPanel buttonPanel = new JPanel(new GridLayout(12, 1));
         JLabel boxLabel = new JLabel("Select:");
@@ -146,6 +178,11 @@ public class MainFrame extends JFrame {
         mainTextPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.getContentPane().add(mainText, BorderLayout.CENTER);
 
+        statePanel = new MyDrawPanel();
+        statePanel.add(new JLabel("                               "));
+        statePanel.setBorder(new MatteBorder(0, 0, 0, 1, SystemColor.activeCaption));
+        this.getContentPane().add(statePanel, BorderLayout.WEST);
+
         warmLabel = new JLabel();
         warmLabel.setBorder(new MatteBorder(1, 0, 0, 0, SystemColor.activeCaption));
         warmLabel.setText("Feed My Dog 1.0");
@@ -194,6 +231,20 @@ public class MainFrame extends JFrame {
 
         public void mouseExited(MouseEvent e) {
             warmLabel.setText("Feed My Dog 1.0");
+        }
+    }
+
+    class MyDrawPanel extends JPanel {
+        @Override
+        public void paint(Graphics g) {
+            super.paint(g);
+            Graphics2D graphics2D = (Graphics2D) g;
+            graphics2D.setColor(Color.orange);
+            graphics2D.fillRect(2, 13, (int) Temp.dog.getClean() / 2, 8);
+            graphics2D.setColor(Color.PINK);
+            graphics2D.fillRect(2, 34, (int) Temp.dog.getStrength() / 2, 8);
+            graphics2D.setColor(Color.CYAN);
+            graphics2D.fillRect(2, 55, (int) Temp.dog.getMood() / 2, 8);
         }
     }
 }
