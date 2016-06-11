@@ -93,9 +93,9 @@ public class Action {
                 sb.append("day:\t" + dog.getDay() + "\n");
                 sb.append("hour:\t" + dog.getHour() + "\n");
                 sb.append("min:\t" + dog.getMin() + "\n");
-                sb.append("mood:\t" + dog.getMood() + "\n");
-                sb.append("clean:\t" + dog.getClean() + "\n");
-                sb.append("strength:\t" + dog.getStrength());
+                sb.append("mood:\t" + String.format("%.2f", dog.getMood()) + "\n");
+                sb.append("clean:\t" + String.format("%.2f", dog.getClean()) + "\n");
+                sb.append("strength:\t" + String.format("%.2f", dog.getStrength()));
                 break;
         }
         return sb.toString();

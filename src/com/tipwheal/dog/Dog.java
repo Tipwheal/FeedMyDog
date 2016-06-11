@@ -66,8 +66,9 @@ public class Dog implements Serializable {
     /**
      * wash.
      */
-    public void wash() {
+    public String wash() {
         clean += 1.0;
+        return "You wash " + this.getName() + ".";
     }
 
     /**

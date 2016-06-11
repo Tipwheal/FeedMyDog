@@ -3,7 +3,7 @@ package com.tipwheal.visual;
 import com.tipwheal.dog.Dog;
 
 /**
- * Created by Administrator on 2016/6/10.
+ * Temp is a place to save something that can use but should pass from one class to another.
  */
 public abstract class Temp {
     public static String str;
