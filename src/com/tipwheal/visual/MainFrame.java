@@ -22,7 +22,7 @@ import static javax.imageio.ImageIO.read;
 /**
  * Created by Administrator on 2016/6/10.
  */
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Runnable {
     private MainFrame mainFrame = this;
     private JTextArea mainText;
     private JButton name;
@@ -66,7 +66,17 @@ public class MainFrame extends JFrame {
             }
         });
         file.add(exit);
+        JMenu dogMenu = new JMenu("Dog");
+        JMenuItem nameItem = new JMenuItem("Name");
+        nameItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new NameRefactor(dog, mainFrame);
+            }
+        });
+        dogMenu.add(nameItem);
         menuBar.add(file);
+        menuBar.add(dogMenu);
         this.setJMenuBar(menuBar);
 
         JPanel buttonPanel = new JPanel(new GridLayout(12, 1));
@@ -179,6 +189,10 @@ public class MainFrame extends JFrame {
         this.getContentPane().add(mainText, BorderLayout.CENTER);
 
         statePanel = new MyDrawPanel();
+        statePanel.setLayout(new BoxLayout(statePanel, BoxLayout.Y_AXIS));
+        statePanel.add(new JLabel("C:"));
+        statePanel.add(new JLabel("S:"));
+        statePanel.add(new JLabel("M:"));
         statePanel.add(new JLabel("                               "));
         statePanel.setBorder(new MatteBorder(0, 0, 0, 1, SystemColor.activeCaption));
         this.getContentPane().add(statePanel, BorderLayout.WEST);
@@ -188,9 +202,23 @@ public class MainFrame extends JFrame {
         warmLabel.setText("Feed My Dog 1.0");
         this.getContentPane().add(warmLabel, BorderLayout.SOUTH);
 
+        Thread repaintThread = new Thread(this);
+        repaintThread.start();
+
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         this.setBounds((dimension.width - 600) / 2, (dimension.height - 400) / 2, 600, 400);
         this.setVisible(true);
+    }
+
+    public void run() {
+        while (true) {
+            statePanel.repaint();
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     class MyMouseListener implements MouseListener {
@@ -235,16 +263,29 @@ public class MainFrame extends JFrame {
     }
 
     class MyDrawPanel extends JPanel {
+        private int clean = (int) Temp.dog.getClean();
+        private int strength = (int) Temp.dog.getStrength();
+        private int mood = (int) Temp.dog.getMood();
+
         @Override
         public void paint(Graphics g) {
             super.paint(g);
+            clean = (int) Temp.dog.getClean();
+            strength = (int) Temp.dog.getStrength();
+            mood = (int) Temp.dog.getMood();
             Graphics2D graphics2D = (Graphics2D) g;
+            graphics2D.setColor(statePanel.getBackground());
+            graphics2D.fillRect(20, 0, 60, 60);
             graphics2D.setColor(Color.orange);
-            graphics2D.fillRect(2, 13, (int) Temp.dog.getClean() / 2, 8);
+            graphics2D.fillRect(20, 5, clean < 120 ? clean / 2 : 60, 8);
             graphics2D.setColor(Color.PINK);
-            graphics2D.fillRect(2, 34, (int) Temp.dog.getStrength() / 2, 8);
-            graphics2D.setColor(Color.CYAN);
-            graphics2D.fillRect(2, 55, (int) Temp.dog.getMood() / 2, 8);
+            graphics2D.fillRect(20, 21, strength < 120 ? strength / 2 : 60, 8);
+            graphics2D.setColor(Color.BLUE);
+            graphics2D.fillRect(20, 37, mood < 120 ? mood / 2 : 60, 8);
+            graphics2D.setColor(Color.lightGray);
+            graphics2D.drawRect(20, 5, 60, 8);
+            graphics2D.drawRect(20, 21, 60, 8);
+            graphics2D.drawRect(20, 37, 60, 8);
         }
     }
 }
