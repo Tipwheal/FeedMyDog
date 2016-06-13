@@ -184,15 +184,17 @@ public class MainFrame extends JFrame implements Runnable {
         mainText.setWrapStyleWord(true);
         mainText.setEditable(false);
         JScrollPane mainTextPane = new JScrollPane(mainText);
+        mainTextPane.setBorder(null);
         mainTextPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        mainTextPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        this.getContentPane().add(mainText, BorderLayout.CENTER);
+        mainTextPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        this.getContentPane().add(mainTextPane, BorderLayout.CENTER);
 
         statePanel = new MyDrawPanel();
         statePanel.setLayout(new BoxLayout(statePanel, BoxLayout.Y_AXIS));
         statePanel.add(new JLabel("C:"));
         statePanel.add(new JLabel("S:"));
         statePanel.add(new JLabel("M:"));
+        statePanel.add(new JLabel("H:"));
         statePanel.add(new JLabel("                               "));
         statePanel.setBorder(new MatteBorder(0, 0, 0, 1, SystemColor.activeCaption));
         this.getContentPane().add(statePanel, BorderLayout.WEST);
@@ -266,6 +268,7 @@ public class MainFrame extends JFrame implements Runnable {
         private int clean = (int) Temp.dog.getClean();
         private int strength = (int) Temp.dog.getStrength();
         private int mood = (int) Temp.dog.getMood();
+        private int hung = Temp.dog.getHung();
 
         @Override
         public void paint(Graphics g) {
@@ -273,6 +276,7 @@ public class MainFrame extends JFrame implements Runnable {
             clean = (int) Temp.dog.getClean();
             strength = (int) Temp.dog.getStrength();
             mood = (int) Temp.dog.getMood();
+            hung = Temp.dog.getHung();
             Graphics2D graphics2D = (Graphics2D) g;
             graphics2D.setColor(statePanel.getBackground());
             graphics2D.fillRect(20, 0, 60, 60);
@@ -281,11 +285,14 @@ public class MainFrame extends JFrame implements Runnable {
             graphics2D.setColor(Color.PINK);
             graphics2D.fillRect(20, 21, strength < 120 ? strength / 2 : 60, 8);
             graphics2D.setColor(Color.BLUE);
-            graphics2D.fillRect(20, 37, mood < 120 ? mood / 2 : 60, 8);
+            graphics2D.fillRect(20, 37, mood < 60 ? mood : 60, 8);
+            graphics2D.setColor(Color.green);
+            graphics2D.fillRect(20, 53, hung < 600 ? hung / 10 : 60, 8);
             graphics2D.setColor(Color.lightGray);
             graphics2D.drawRect(20, 5, 60, 8);
             graphics2D.drawRect(20, 21, 60, 8);
             graphics2D.drawRect(20, 37, 60, 8);
+            graphics2D.drawRect(20, 53, 60, 8);
         }
     }
 }
