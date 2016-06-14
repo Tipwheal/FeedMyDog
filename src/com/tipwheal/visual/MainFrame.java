@@ -5,22 +5,19 @@ import com.tipwheal.dog.Action;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
-import javax.tools.Tool;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.ColorModel;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static javax.imageio.ImageIO.read;
 
 /**
- * Created by Administrator on 2016/6/10.
+ * MainFrame.
  */
 public class MainFrame extends JFrame implements Runnable {
     private MainFrame mainFrame = this;
@@ -34,8 +31,20 @@ public class MainFrame extends JFrame implements Runnable {
     private JButton random;
     private JButton help;
     private JButton setting;
+    private ArrayList<JButton> buttons = new ArrayList<>();
+    private JMenuItem nameItem;
+    private JMenuItem playItem;
+    private JMenuItem washItem;
+    private JMenuItem exerciseItem;
+    private JMenuItem feedItem;
+    private JMenuItem showItem;
+    private JMenuItem randomItem;
+    private JMenuItem helpItem;
+    private JMenuItem settingItem;
+    private ArrayList<JMenuItem> dogItems = new ArrayList<>();
     private JLabel warmLabel;
     private JPanel statePanel;
+    private Dog dog = Temp.dog;
 
     /**
      * constructor.
@@ -46,6 +55,9 @@ public class MainFrame extends JFrame implements Runnable {
         Action action = new Action();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Feed My Dog 1.0");
+
+        ActionListener myActionListener = new MyActionListener();
+        MouseListener myMouseListener = new MyMouseListener();
 
         try {
             Image image = ImageIO.read(this.getClass().getResource("/img/newlogo.png"));
@@ -67,26 +79,28 @@ public class MainFrame extends JFrame implements Runnable {
         });
         file.add(exit);
         JMenu dogMenu = new JMenu("Dog");
-        JMenuItem nameItem = new JMenuItem("Name");
-        nameItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new NameRefactor(dog, mainFrame);
-            }
-        });
-        JMenuItem playItem = new JMenuItem("Play");
-        JMenuItem washItem = new JMenuItem("Wash");
-        JMenuItem feedItem = new JMenuItem("Feed");
-        JMenuItem exerciseItem = new JMenuItem("Exercise");
-        JMenuItem randomItem = new JMenuItem("Random");
-        JMenuItem helpItem = new JMenuItem("Help");
-        dogMenu.add(nameItem);
-        dogMenu.add(playItem);
-        dogMenu.add(washItem);
-        dogMenu.add(feedItem);
-        dogMenu.add(exerciseItem);
-        dogMenu.add(randomItem);
-        dogMenu.add(helpItem);
+        nameItem = new JMenuItem("Name");
+        playItem = new JMenuItem("Play");
+        washItem = new JMenuItem("Wash");
+        feedItem = new JMenuItem("Feed");
+        exerciseItem = new JMenuItem("Exercise");
+        showItem = new JMenuItem("Show");
+        randomItem = new JMenuItem("Random");
+        helpItem = new JMenuItem("Help");
+        settingItem = new JMenuItem("Setting");
+        dogItems.add(nameItem);
+        dogItems.add(playItem);
+        dogItems.add(washItem);
+        dogItems.add(feedItem);
+        dogItems.add(exerciseItem);
+        dogItems.add(showItem);
+        dogItems.add(randomItem);
+        dogItems.add(helpItem);
+        dogItems.add(settingItem);
+        for (JMenuItem item : dogItems) {
+            dogMenu.add(item);
+            item.addActionListener(new MyActionListener());
+        }
         menuBar.add(file);
         menuBar.add(dogMenu);
         this.setJMenuBar(menuBar);
@@ -95,99 +109,39 @@ public class MainFrame extends JFrame implements Runnable {
         JLabel boxLabel = new JLabel("Select:");
         buttonPanel.add(boxLabel);
         name = new JButton();
+        buttons.add(name);
         name.setText("name");
-        name.setBackground(Color.lightGray);
-        name.addMouseListener(new MyMouseListener());
-        name.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new NameRefactor(dog, mainFrame);
-            }
-        });
         play = new JButton();
+        buttons.add(play);
         play.setText("play");
-        play.setBackground(Color.lightGray);
-        play.addMouseListener(new MyMouseListener());
-        play.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainText.setText(dog.play());
-//                new PlayFrame(mainFrame,"What To Play",true);
-            }
-        });
         wash = new JButton();
+        buttons.add(wash);
         wash.setText("wash");
-        wash.setBackground(Color.lightGray);
-        wash.addMouseListener(new MyMouseListener());
-        wash.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainText.setText(dog.wash());
-            }
-        });
         exercise = new JButton();
+        buttons.add(exercise);
         exercise.setText("exercise");
-        exercise.setBackground(Color.lightGray);
-        exercise.addMouseListener(new MyMouseListener());
-        exercise.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainText.setText("Your dog exercise and be stronger.");
-                dog.exercise();
-            }
-        });
         feed = new JButton();
+        buttons.add(feed);
         feed.setText("feed");
-        feed.setBackground(Color.lightGray);
-        feed.addMouseListener(new MyMouseListener());
-        feed.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainText.setText("You feed your dog.");
-                dog.feed();
-            }
-        });
         show = new JButton();
+        buttons.add(show);
         show.setText("show");
-        show.setBackground(Color.lightGray);
-        show.addMouseListener(new MyMouseListener());
-        show.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainText.setText(action.show("-a", dog));
-            }
-        });
         random = new JButton();
+        buttons.add(random);
         random.setText("random");
-        random.setBackground(Color.lightGray);
-        random.addMouseListener(new MyMouseListener());
-        random.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainText.setText(action.randomShow(dog));
-            }
-        });
         help = new JButton();
+        buttons.add(help);
         help.setText("help");
-        help.setBackground(Color.lightGray);
-        help.addMouseListener(new MyMouseListener());
-        help.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainText.setText(action.getAllCommands());
-            }
-        });
         setting = new JButton();
+        buttons.add(setting);
         setting.setText("setting");
-        setting.setBackground(Color.lightGray);
-        setting.addMouseListener(new MyMouseListener());
-        setting.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new SettingFrame(mainFrame);
-            }
-        });
         buttonPanel.add(new JLabel(""));
-        buttonPanel.add(name);
-        buttonPanel.add(play);
-        buttonPanel.add(wash);
-        buttonPanel.add(exercise);
-        buttonPanel.add(feed);
-        buttonPanel.add(show);
-        buttonPanel.add(random);
-        buttonPanel.add(help);
-        buttonPanel.add(setting);
+        for (JButton button : buttons) {
+            buttonPanel.add(button);
+            button.addActionListener(myActionListener);
+            button.addMouseListener(myMouseListener);
+            button.setBackground(Color.lightGray);
+        }
         buttonPanel.setBorder(new MatteBorder(0, 1, 0, 0, SystemColor.activeCaption));
         this.getContentPane().add(buttonPanel, BorderLayout.EAST);
 
@@ -235,21 +189,44 @@ public class MainFrame extends JFrame implements Runnable {
         }
     }
 
+    class MyActionListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == name || e.getSource() == nameItem) {
+                new NameRefactor(dog, mainFrame);
+            } else if (e.getSource() == play || e.getSource() == playItem) {
+                mainText.setText(dog.play());
+            } else if (e.getSource() == wash || e.getSource() == washItem) {
+                mainText.setText(dog.wash());
+            } else if (e.getSource() == exercise || e.getSource() == exerciseItem) {
+                mainText.setText("Your dog exercise and be stronger.");
+                dog.exercise();
+            } else if (e.getSource() == feed || e.getSource() == feedItem) {
+                mainText.setText("You feed your dog.");
+                dog.feed();
+            } else if (e.getSource() == show || e.getSource() == showItem) {
+                mainText.setText(new Action().show("-a", dog));
+            } else if (e.getSource() == help || e.getSource() == helpItem) {
+                mainText.setText(new Action().getAllCommands());
+            } else if (e.getSource() == random || e.getSource() == randomItem) {
+                mainText.setText(new Action().randomShow(dog));
+            } else if (e.getSource() == setting || e.getSource() == settingItem) {
+                new SettingFrame(mainFrame);
+            }
+        }
+    }
+
     /**
      * MyMouseListener.
      */
     class MyMouseListener implements MouseListener {
-
         public void mouseClicked(MouseEvent e) {
-
         }
 
         public void mousePressed(MouseEvent e) {
-
         }
 
         public void mouseReleased(MouseEvent e) {
-
         }
 
         public void mouseEntered(MouseEvent e) {
