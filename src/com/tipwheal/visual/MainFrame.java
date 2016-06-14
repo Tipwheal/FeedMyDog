@@ -74,7 +74,19 @@ public class MainFrame extends JFrame implements Runnable {
                 new NameRefactor(dog, mainFrame);
             }
         });
+        JMenuItem playItem = new JMenuItem("Play");
+        JMenuItem washItem = new JMenuItem("Wash");
+        JMenuItem feedItem = new JMenuItem("Feed");
+        JMenuItem exerciseItem = new JMenuItem("Exercise");
+        JMenuItem randomItem = new JMenuItem("Random");
+        JMenuItem helpItem = new JMenuItem("Help");
         dogMenu.add(nameItem);
+        dogMenu.add(playItem);
+        dogMenu.add(washItem);
+        dogMenu.add(feedItem);
+        dogMenu.add(exerciseItem);
+        dogMenu.add(randomItem);
+        dogMenu.add(helpItem);
         menuBar.add(file);
         menuBar.add(dogMenu);
         this.setJMenuBar(menuBar);
@@ -163,7 +175,7 @@ public class MainFrame extends JFrame implements Runnable {
         setting.addMouseListener(new MyMouseListener());
         setting.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                new SettingFrame(mainFrame);
             }
         });
         buttonPanel.add(new JLabel(""));
