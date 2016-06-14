@@ -114,8 +114,7 @@ public class Dog implements Serializable {
             this.play();
             return;
         }
-        Adder adder = (Adder) u.use(this);
-        adder.use(this);
+        u.use(this);
     }
 
     /**

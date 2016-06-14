@@ -4,14 +4,39 @@ package com.tipwheal.dog;
  * Created by Administrator on 2016/6/10.
  */
 public class BasketBall implements UseAble {
-    public StoreAble use(Dog dog) {
-        int hung = -5;
-        double clean = -5.0;
-        double strength = 0.5;
-        double mood = 1.3;
-        return new Adder(hung,clean,strength,mood,dog);
+    private double size = 2.0;
+
+    public void use(Dog dog) {
+        dog.setHung(dog.getHung() - 5);
+        dog.setClean(dog.getClean() - 5);
+        dog.setStrength(dog.getStrength() + 0.5);
+        dog.setMood(dog.getMood() + 1.3);
     }
+
+    /**
+     * store.
+     *
+     * @param room
+     */
     public void store(Room room) {
-        room.store(2);
+        room.store(this);
+    }
+
+    /**
+     * getter for size.
+     *
+     * @return
+     */
+    public double getSize() {
+        return size;
+    }
+
+    /**
+     * copy.
+     *
+     * @return
+     */
+    public UseAble copy() {
+        return new BasketBall();
     }
 }
