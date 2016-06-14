@@ -2,6 +2,8 @@ package com.tipwheal.visual;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Administrator on 2016/6/11.
