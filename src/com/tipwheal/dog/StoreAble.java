@@ -5,4 +5,6 @@ package com.tipwheal.dog;
  */
 public interface StoreAble {
     public void store(Room room);
+
+    public double getSize();
 }

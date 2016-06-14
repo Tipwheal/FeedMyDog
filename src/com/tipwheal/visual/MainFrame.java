@@ -235,6 +235,9 @@ public class MainFrame extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * MyMouseListener.
+     */
     class MyMouseListener implements MouseListener {
 
         public void mouseClicked(MouseEvent e) {
@@ -276,6 +279,9 @@ public class MainFrame extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * MyDrawPanel.
+     */
     class MyDrawPanel extends JPanel {
         private int clean = (int) Temp.dog.getClean();
         private int strength = (int) Temp.dog.getStrength();
