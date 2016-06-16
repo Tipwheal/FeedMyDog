@@ -44,7 +44,7 @@ public class MainFrame extends JFrame implements Runnable {
     private ArrayList<JMenuItem> dogItems = new ArrayList<>();
     private JLabel warmLabel;
     private JPanel statePanel;
-    private Dog dog = Temp.dog;
+    private Dog dog;
 
     /**
      * constructor.
@@ -52,6 +52,7 @@ public class MainFrame extends JFrame implements Runnable {
      * @param dog
      */
     public MainFrame(Dog dog) {
+        this.dog = dog;
         Action action = new Action();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Feed My Dog 1.0");
@@ -109,30 +110,30 @@ public class MainFrame extends JFrame implements Runnable {
         JLabel boxLabel = new JLabel("Select:");
         buttonPanel.add(boxLabel);
         name = new JButton();
-        buttons.add(name);
         name.setText("name");
         play = new JButton();
-        buttons.add(play);
         play.setText("play");
         wash = new JButton();
-        buttons.add(wash);
         wash.setText("wash");
         exercise = new JButton();
-        buttons.add(exercise);
         exercise.setText("exercise");
         feed = new JButton();
-        buttons.add(feed);
         feed.setText("feed");
         show = new JButton();
-        buttons.add(show);
         show.setText("show");
         random = new JButton();
-        buttons.add(random);
         random.setText("random");
         help = new JButton();
-        buttons.add(help);
         help.setText("help");
         setting = new JButton();
+        buttons.add(name);
+        buttons.add(play);
+        buttons.add(wash);
+        buttons.add(exercise);
+        buttons.add(feed);
+        buttons.add(show);
+        buttons.add(random);
+        buttons.add(help);
         buttons.add(setting);
         setting.setText("setting");
         buttonPanel.add(new JLabel(""));
@@ -178,6 +179,9 @@ public class MainFrame extends JFrame implements Runnable {
         this.setVisible(true);
     }
 
+    /**
+     * run.
+     */
     public void run() {
         while (true) {
             statePanel.repaint();
@@ -189,8 +193,10 @@ public class MainFrame extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * ActionListener.
+     */
     class MyActionListener implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == name || e.getSource() == nameItem) {
                 new NameRefactor(dog, mainFrame);
@@ -265,7 +271,11 @@ public class MainFrame extends JFrame implements Runnable {
         private int mood = (int) Temp.dog.getMood();
         private int hung = Temp.dog.getHung();
 
-        @Override
+        /**
+         * draw lines of numbers.
+         *
+         * @param g
+         */
         public void paint(Graphics g) {
             super.paint(g);
             clean = (int) Temp.dog.getClean();
